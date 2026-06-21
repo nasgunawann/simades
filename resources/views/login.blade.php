@@ -181,12 +181,15 @@
         <div class="text-center mb-6 animate-fade-up stagger-1">
             <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-forest-600 shadow-2xl mb-4 relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-br from-forest-500 to-forest-800"></div>
-                <svg class="w-10 h-10 text-white relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <!-- <svg class="w-10 h-10 text-white relative z-10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-                </svg>
+                </svg> -->
+                <div class="">
+                    <img src="{{ asset('imgs/logo_langkat.png') }}" alt="Logo" class="w-full h-full object-contain mx-auto drop-shadow-2xl">
+                </div>
             </div>
             <h1 class="font-serif text-3xl font-bold text-white tracking-tight italic">SIMADES</h1>
-            <p class="text-forest-300 text-sm mt-1 font-medium tracking-widest uppercase">Sistem Manajemen Desa</p>
+            <p class="text-forest-300 text-sm mt-1 font-medium tracking-widest uppercase">Sistem Manajemen Desa Pantai Gemi</p>
         </div>
 
         {{-- Card --}}
