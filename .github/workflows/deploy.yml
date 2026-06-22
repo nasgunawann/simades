@@ -2,11 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-<<<<<<< HEAD
-    branches: [ "master" ] # Triggers only when you push to your main branch
-=======
     branches: [ "main" ] # Triggers only when you push to your main branch
->>>>>>> 2f44cd8e3295bb6c24604447400620cc64df2ef3
 
 jobs:
   build-and-push:
