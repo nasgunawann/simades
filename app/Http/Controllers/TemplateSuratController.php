@@ -100,9 +100,12 @@ class TemplateSuratController extends Controller
     public function destroy(TemplateSurat $template)
     {
         $path = public_path('templates/' . $template->file_word);
+
         if (file_exists($path)) {
             unlink($path);
         }
+
+        $template->delete();
 
         return redirect()->route('template.index')
             ->with('success', 'Template surat berhasil dihapus.');
