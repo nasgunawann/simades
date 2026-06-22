@@ -2,7 +2,7 @@ name: Build and Push Docker Image
 
 on:
   push:
-    branches: ["master"] # Triggers only when you push to your main branch
+    branches: ["master"]
 
 jobs:
   build-and-push:
@@ -21,6 +21,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          file: docker/php.Dockerfile
           push: true
           no-cache: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/simades-prod:latest
