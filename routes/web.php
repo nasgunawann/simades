@@ -75,8 +75,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/warga',        [WargaController::class, 'index'])->name('warga.index');
     Route::get('/warga/tambah', [WargaController::class, 'create'])->name('warga.create');
+    Route::get('/warga/export',     [WargaController::class, 'export'])->name('warga.export');
     Route::get('/warga/{warga}', [WargaController::class, 'show'])->name('warga.show');
     Route::post('/warga',       [WargaController::class, 'store'])->name('warga.store');
+
 
     Route::get('/warga/{warga}/edit', [WargaController::class, 'edit'])->name('warga.edit');
     Route::put('/warga/{warga}',      [WargaController::class, 'update'])->name('warga.update');

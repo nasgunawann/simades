@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Warga;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class WargaController extends Controller
 {
@@ -106,5 +107,64 @@ class WargaController extends Controller
 
         return redirect()->route('warga.index')
             ->with('success', 'Data warga berhasil dihapus.');
+    }
+
+    public function export(Request $request): StreamedResponse
+    {
+        $query = Warga::query();
+
+        if ($request->filled('search')) {
+            $query->where('nama', 'like', '%' . $request->search . '%')
+                ->orWhere('nik', 'like', '%' . $request->search . '%');
+        }
+
+        $wargas = $query->latest()->get();
+
+        $headers = [
+            'Content-Type'        => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => 'attachment; filename="data-warga-' . now()->format('Ymd-His') . '.csv"',
+        ];
+
+        $callback = function () use ($wargas) {
+            $file = fopen('php://output', 'w');
+
+            // BOM supaya Excel bisa baca karakter Indonesia dengan benar
+            fputs($file, "\xEF\xBB\xBF");
+
+            // Header kolom
+            fputcsv($file, [
+                'No',
+                'NIK',
+                'Nama Lengkap',
+                'Tempat Lahir',
+                'Tanggal Lahir',
+                'Jenis Kelamin',
+                'Agama',
+                'Status Perkawinan',
+                'Alamat',
+                'Pekerjaan',
+                'Nomor Telepon',
+            ]);
+
+            foreach ($wargas as $i => $warga) {
+                fputcsv($file, [
+                    $i + 1,
+                    $warga->nik,
+                    $warga->nama,
+                    $warga->tempat_lahir,
+                    $warga->tanggal_lahir,
+                    $warga->jenis_kelamin,
+                    $warga->agama,
+                    $warga->status_perkawinan,
+                    $warga->alamat,
+                    $warga->pekerjaan,
+                    $warga->nomor_telepon,
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
     }
 }
