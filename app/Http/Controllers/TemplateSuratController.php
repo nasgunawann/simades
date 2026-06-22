@@ -7,9 +7,17 @@ use Illuminate\Http\Request;
 
 class TemplateSuratController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $templates = TemplateSurat::latest()->get();
+        $query = TemplateSurat::query();
+
+        // fitur search
+        if ($request->filled('search')) {
+            $query->where('nama_template', 'like', '%' . $request->search . '%');
+        }
+
+        $templates = $query->latest()->get();
+
         return view('template.index', compact('templates'));
     }
 

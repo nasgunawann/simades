@@ -25,18 +25,39 @@
 
         {{-- Toolbar --}}
         <div class="px-5 py-4 border-b border-gray-100">
-            <div class="flex gap-2">
+            <form method="GET" action="{{ route('template.index') }}" class="flex items-center gap-2">
+
                 <div class="relative w-full sm:w-64">
-                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803a7.5 7.5 0 0010.607 10.607z" />
+                    <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 15.803a7.5 7.5 0 0010.607 10.607z" />
                     </svg>
-                    <input type="text" placeholder="Cari nama template..."
-                        class="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-forest-300 bg-gray-50 placeholder-gray-400 text-gray-700">
+
+                    <input
+                        type="text"
+                        name="search"
+                        value="{{ request('search') }}"
+                        placeholder="Cari nama template..."
+                        class="w-full pl-9 pr-4 py-2 text-sm border border-gray-200 rounded-xl
+                            focus:outline-none focus:ring-2 focus:ring-forest-300
+                            bg-gray-50 text-gray-700"
+                    >
                 </div>
-                <button class="px-4 py-2 bg-forest-600 hover:bg-forest-700 text-white text-sm font-semibold rounded-xl transition-colors">
+
+                <button type="submit"
+                    class="px-4 py-2 bg-forest-600 hover:bg-forest-700 text-white text-sm font-semibold rounded-xl">
                     Cari
                 </button>
-            </div>
+
+                @if(request('search'))
+                    <a href="{{ route('template.index') }}"
+                        class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-600 text-sm font-semibold rounded-xl">
+                        Reset
+                    </a>
+                @endif
+
+            </form>
         </div>
 
         {{-- Table --}}
