@@ -7,7 +7,7 @@ COPY resources/ ./resources/
 RUN npm install && npm run build
 
 # === STAGE 2: Production PHP Runtime ===
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 # Install essential system extensions for Laravel
 RUN apk add --no-cache \
